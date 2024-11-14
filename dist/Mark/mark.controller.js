@@ -16,6 +16,7 @@ exports.MarkController = void 0;
 const common_1 = require("@nestjs/common");
 const mark_service_1 = require("./mark.service");
 const Mark_entity_1 = require("./entity/Mark.entity");
+const Jwt_auth_guard_1 = require("../auth/Jwt-auth.guard");
 let MarkController = class MarkController {
     constructor(marksService) {
         this.marksService = marksService;
@@ -28,6 +29,9 @@ let MarkController = class MarkController {
     }
     create(marks) {
         return this.marksService.create(marks);
+    }
+    async getMyMarks(req) {
+        return this.marksService.findMarksByStudentId(req.user.id);
     }
     update(id, marks) {
         return this.marksService.update(id, marks);
@@ -58,6 +62,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], MarkController.prototype, "create", null);
 __decorate([
+    (0, common_1.Get)('my-marks'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], MarkController.prototype, "getMyMarks", null);
+__decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -74,6 +85,7 @@ __decorate([
 ], MarkController.prototype, "remove", null);
 exports.MarkController = MarkController = __decorate([
     (0, common_1.Controller)('mark'),
+    (0, common_1.UseGuards)(Jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [mark_service_1.MarkService])
 ], MarkController);
 //# sourceMappingURL=mark.controller.js.map

@@ -16,6 +16,7 @@ exports.TeacherController = void 0;
 const common_1 = require("@nestjs/common");
 const teacher_service_1 = require("./teacher.service");
 const Teacher_entity_1 = require("./entity/Teacher.entity");
+const Jwt_auth_guard_1 = require("../auth/Jwt-auth.guard");
 let TeacherController = class TeacherController {
     constructor(teacherService) {
         this.teacherService = teacherService;
@@ -75,6 +76,7 @@ __decorate([
 exports.TeacherController = TeacherController = __decorate([
     (0, common_1.Injectable)(),
     (0, common_1.Controller)('teacher'),
+    (0, common_1.UseGuards)(Jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [teacher_service_1.TeacherService])
 ], TeacherController);
 //# sourceMappingURL=teacher.controller.js.map

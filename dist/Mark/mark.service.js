@@ -18,6 +18,9 @@ const typeorm_1 = require("@nestjs/typeorm");
 const Mark_entity_1 = require("./entity/Mark.entity");
 const typeorm_2 = require("typeorm");
 let MarkService = class MarkService {
+    findMarksByStudentId(id) {
+        throw new Error('Method not implemented.');
+    }
     constructor(markRepository) {
         this.markRepository = markRepository;
     }

@@ -4,6 +4,7 @@ import { CreateMarksDto } from './DTO/Create.markDto';
 import { UpdateMarksDto } from './DTO/Update.markDto';
 export declare class MarkService {
     private markRepository;
+    findMarksByStudentId(id: any): void;
     constructor(markRepository: Repository<MARKS>);
     findAll(): Promise<MARKS[]>;
     findOne(id: number): Promise<MARKS>;

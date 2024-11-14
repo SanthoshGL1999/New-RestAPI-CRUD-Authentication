@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const student_service_1 = require("./student.service");
 const Create_StudentDto_1 = require("./DTO/Create.StudentDto");
 const Update_studentDto_1 = require("./DTO/Update.studentDto");
+const Jwt_auth_guard_1 = require("../auth/Jwt-auth.guard");
 let StudentController = class StudentController {
     constructor(studentService) {
         this.studentService = studentService;
@@ -29,6 +30,9 @@ let StudentController = class StudentController {
     }
     create(createStudentDto) {
         return this.studentService.create(createStudentDto);
+    }
+    async getMyProfile(req) {
+        return this.studentService.findOne(req.user.id);
     }
     update(id, updateStudentDto) {
         return this.studentService.update(id, updateStudentDto);
@@ -59,6 +63,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], StudentController.prototype, "create", null);
 __decorate([
+    (0, common_1.Get)('my-profile'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], StudentController.prototype, "getMyProfile", null);
+__decorate([
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -75,6 +86,7 @@ __decorate([
 ], StudentController.prototype, "remove", null);
 exports.StudentController = StudentController = __decorate([
     (0, common_1.Controller)('student'),
+    (0, common_1.UseGuards)(Jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [student_service_1.StudentService])
 ], StudentController);
 //# sourceMappingURL=student.controller.js.map

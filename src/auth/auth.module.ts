@@ -15,11 +15,11 @@ import { UserModule } from 'src/user/user.module';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: jwtConstants.secret|| 'default_secret_key', 
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '1d' },
     }),
   ],
-  providers: [AuthService, JwtStrategy,],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
-  exports: [JwtModule,PassportModule],
+  // exports: [JwtModule,PassportModule],
 })
 export class AuthModule {}

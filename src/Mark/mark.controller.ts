@@ -1,8 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Request, UseGuards} from '@nestjs/common';
 import { MarkService } from './mark.service';
 import { MARKS } from './entity/Mark.entity';
+import { JwtAuthGuard } from 'src/auth/Jwt-auth.guard';
+
 
 @Controller('mark')
+@UseGuards(JwtAuthGuard)
 export class MarkController {
     constructor(private readonly marksService: MarkService){}
 
@@ -19,6 +22,12 @@ export class MarkController {
     @Post()
     create(@Body() marks: MARKS){
         return this.marksService.create(marks)
+    }
+
+   
+    @Get('my-marks')
+    async getMyMarks(@Request() req) {
+    return this.marksService.findMarksByStudentId(req.user.id);
     }
 
     @Put(':id')

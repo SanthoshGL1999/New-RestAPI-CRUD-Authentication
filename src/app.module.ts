@@ -8,7 +8,7 @@ import { StudentModule } from './Student/student.module';
 import { MarkModule } from './Mark/mark.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { Users } from './user/entities/user.entity';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [TeacherModule,StudentModule,MarkModule,UserModule,

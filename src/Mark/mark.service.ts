@@ -7,6 +7,9 @@ import { UpdateMarksDto } from './DTO/Update.markDto';
 
 @Injectable()
 export class MarkService {
+    findMarksByStudentId(id: any) {
+        throw new Error('Method not implemented.');
+    }
 
     constructor(@InjectRepository(MARKS)
     private markRepository: Repository<MARKS>,
